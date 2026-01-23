@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .herobar {
+
+        display: flex;
+        flex-direction: row;
+        font-size: 50px;
+
+    }
+
+    .herobar * {
+        letter-spacing: -20px;
+    }
+
+    .bossbar {
+
+        display: flex;
+        flex-direction: row;
+        font-size: 100px;
+    }
+
+    .bossbar * {
+        letter-spacing: -40px;
+    }
+</style>
+
+<body>
+    <button onclick="turn()">Punch</button>
+    <button onclick="healthpotion()">Health Potion</button>
+
+    <div class="herobar" id="hearts">
+
+        <div id="lives">❤️</div>
+
+    </div>
+
+    <div>
+        <p id="lost">Welcome to the dungeon</p>
+        <p id="victory">Are you ready to fight?</p>
+    </div>
+
+
+    <div class="bossbar" id="stars">
+
+        <div id="b1">🖤</div>
+
+
+    </div>
+
+
+
+
+
+
+    <script>
+        let bosshealth = 8;
+        let bossstar = document.getElementById("b1");
+        let health = 6;
+        let herohealth = document.getElementById("lives");
+
+
+        function bossdamage() {
+
+
+        }
+
+        function healthpotion() {
+            health+=3; 
+            document.getElementById("hearts").replaceChildren();
+            for (let index = 0; index < health; index++) {
+                const healthbar = herohealth.cloneNode(true)
+                document.getElementById("hearts").appendChild(healthbar);
+                console.log(herohealth)
+            }
+            
+
+
+        }
+
+        //starts the fight by adding a set number of healthbars
+        function startfight() {
+            document.getElementById("stars").replaceChildren();
+            for (let index = 0; index < bosshealth; index++) {
+                const showbosshealth = bossstar.cloneNode(true)
+                document.getElementById("stars").appendChild(showbosshealth);
+                console.log(bossstar)
+
+            }
+            document.getElementById("hearts").replaceChildren();
+            for (let index = 0; index < health; index++) {
+                const healthbar = herohealth.cloneNode(true)
+                document.getElementById("hearts").appendChild(healthbar);
+                console.log(herohealth)
+            }
+        }
+        
+
+        //Lage en variabel og funksjon som endrer status til bosshealth
+        function turn() {
+
+            //bestemmer hvor mye bossen misterliv og hvor mye hero mister liv
+            const damage = Math.floor(Math.random() * 3) + 1;
+            const herodamage = Math.floor(Math.random() * 3) + 1;
+
+            //fjerner så mange liv (<div>hearts</div>) som variabelen over bestemmer, en for hero, en for boss
+            for (let index = 0; index < damage; index++) {
+                document.getElementById("stars").firstElementChild?.remove();
+            }
+
+            for (let index = 0; index < herodamage; index++) {
+                document.getElementById("hearts").firstElementChild?.remove();
+            }
+            if (bosshealth <= 0 || health <= 0) return
+            bosshealth = bosshealth - damage;
+            health = health - herodamage;
+
+            console.log(bosshealth)
+            console.log(health)
+
+
+            //damage to the boss, if the boss has 0 health you win.
+            document.getElementById("victory").innerText = "i did " + damage.toString() + " damage to the boss!";
+
+            if (bosshealth <= 0 && health <= 0) {
+                document.getElementById("lost").innerText = "Its a Draw";
+                document.getElementById("victory").innerText = "";
+                return
+
+            }
+            if (bosshealth <= 0) {
+                document.getElementById("victory").innerText = "you won";
+
+            }
+
+            //heros damage, and if he lost. (lost msg does not work)
+            document.getElementById("lost").innerText = "The boss did " + herodamage.toString() + " damage to you!";
+
+            if (health <= 0) {
+                document.getElementById("lost").innerText = "you LOST!";
+                return
+
+            }
+
+
+        }
+
+
+
+startfight()
+
+    </script>
+</body>
+
+</html>
