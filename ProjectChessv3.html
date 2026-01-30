@@ -38,41 +38,45 @@
         width: 100px;
         align-content: center;
       }
-      
     </style>
     <!-- The <table> HTML element represents tabular data—that is, information presented in
          a two-dimensional table comprised of rows and columns of cells containing data-->
     <table id="chessboard"></table>
     <table>
-      <button onclick="rookButton()"><img style = " height: 75px; width: 75px;" src = ./bilder/chessrook.png></button>
-      <button onclick="bishopButton()"><img style = " height: 75px; width: 75px;" src = ./bilder/chessbishop.png></button>
-      <button onclick="queenButton()"><img style = " height: 75px; width: 75px;" src = ./bilder/chessqueen.png></button>
+      <button onclick="rookButton()">
+        <img style="height: 75px; width: 75px" src="./bilder/chessrook.png" />
+      </button>
+      <button onclick="bishopButton()">
+        <img style="height: 75px; width: 75px" src="./bilder/chessbishop.png" />
+      </button>
+      <button onclick="queenButton()">
+        <img style="height: 75px; width: 75px" src="./bilder/chessqueen.png" />
+      </button>
     </table>
 
     <script>
       //Upgraded the array to a 2d array for easier access to positions
-        let rook = true;
-        let bishop = true;
-        let queen = false;
+      let rook = true;
+      let bishop = true;
+      let queen = false;
       function OnClick() {
         console.log("klikked!!!!!");
       }
       function rookButton() {
-         rook = true;
-         bishop = false;
-         queen = false;
-
+        rook = true;
+        bishop = false;
+        queen = false;
       }
       function bishopButton() {
-         bishop = true;
-         rook = false;
-         queen = false;
+        bishop = true;
+        rook = false;
+        queen = false;
       }
       function queenButton() {
-         queen = true;
-         bishop = false;
-         rook = false;
-        console.log(queen , bishop , rook)
+        queen = true;
+        bishop = false;
+        rook = false;
+        console.log(queen, bishop, rook);
       }
 
       function drawtiles() {
@@ -90,9 +94,9 @@
             const addTile = document.createElement("td");
             //I dont remember why i needed () =>.
             addTile.onclick = (event) => {
-              console.log(event);
+              console.log(event.currentTarget);
               //removes the " - " and seperates the x and y
-              let position = event.target.id.split(`-`);
+              let position = event.currentTarget.id.split(`-`);
               //Create an loop for x and the y.
               for (let x = 0; x < 8; x++) {
                 for (let y = 0; y < 8; y++) {
@@ -102,22 +106,21 @@
                   element.innerHTML = "";
                 }
               }
-              if (rook === true || queen === true){
-              for (let x = 0; x < 8; x++) {
-                const rowId = `${x}-${position[1]}`;
-                const rowElement = document.getElementById(rowId);
-                rowElement.classList.add("red");
-                const colid = `${position[0]}-${x}`;
-                const colElement = document.getElementById(colid);
-                colElement.classList.add("red");
+              if (rook === true || queen === true) {
+                for (let x = 0; x < 8; x++) {
+                  const rowId = `${x}-${position[1]}`;
+                  const rowElement = document.getElementById(rowId);
+                  rowElement.classList.add("red");
+                  const colid = `${position[0]}-${x}`;
+                  const colElement = document.getElementById(colid);
+                  colElement.classList.add("red");
+                }
               }
-            }
 
               //Find the x y coordinates and finds the diagonal tile next to the position
               // ?. means if the element is undefined, also the tile is not on the board
               // then it wont execute the function
-              if (queen === true || bishop === true){
-
+              if (queen === true || bishop === true) {
                 for (let x = 0; x < 8; x++) {
                   document
                     .getElementById(`${u + x}-${i + x}`)
@@ -134,19 +137,17 @@
                 }
               }
 
-              if (rook === true){
+              if (rook === true) {
                 //adds the rook image
-                event.target.innerHTML = `<img style = " height: 75px; width: 75px;" src = ./bilder/chessrook.png>`;
+                event.currentTarget.innerHTML = `<img style = " height: 75px; width: 75px;" src = "./bilder/chessrook.png">`;
               }
-              if (bishop === true){
-                //adds the rook image
-                event.target.innerHTML = `<img style = " height: 75px; width: 75px;" src = ./bilder/chessbishop.png>`;
+              if (bishop === true) {
+                event.currentTarget.innerHTML = `<img style = " height: 75px; width: 75px;" src = "./bilder/chessbishop.png">`;
               }
-              if (queen === true){
-                //adds the rook image
-                event.target.innerHTML = `<img style = " height: 75px; width: 75px;" src = ./bilder/chessqueen.png>`;
+              if (queen === true) {
+                event.currentTarget.innerHTML = `<img style = " height: 75px; width: 75px;" src = "./bilder/chessqueen.png">`;
               }
-              console.log(position);
+              console.log(event.currentTarget);
               OnClick();
             };
 
