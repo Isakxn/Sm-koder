@@ -30,13 +30,24 @@
       #chessboard td {
         text-align: center;
       }
+
+      button {
+        border: 0;
+        background-color: rgb(255, 255, 255);
+        height: 100px;
+        width: 100px;
+        align-content: center;
+      }
+      
     </style>
     <!-- The <table> HTML element represents tabular data—that is, information presented in
          a two-dimensional table comprised of rows and columns of cells containing data-->
     <table id="chessboard"></table>
-    <button onclick="rookButton()">Rook</button>
-    <button onclick="bishopButton()">Bishop</button>
-    <button onclick="queenButton()">Queen</button>
+    <table>
+      <button onclick="rookButton()"><img style = " height: 75px; width: 75px;" src = ./bilder/chessrook.png></button>
+      <button onclick="bishopButton()"><img style = " height: 75px; width: 75px;" src = ./bilder/chessbishop.png></button>
+      <button onclick="queenButton()"><img style = " height: 75px; width: 75px;" src = ./bilder/chessqueen.png></button>
+    </table>
 
     <script>
       //Upgraded the array to a 2d array for easier access to positions
